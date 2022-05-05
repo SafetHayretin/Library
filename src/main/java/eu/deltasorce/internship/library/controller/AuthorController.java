@@ -1,28 +1,35 @@
 package eu.deltasorce.internship.library.controller;
 
 import eu.deltasorce.internship.library.model.book.Author;
-import eu.deltasorce.internship.library.service.AuthorService;
 
+import java.time.LocalDate;
+
+import static eu.deltasorce.internship.library.repository.AuthorRepository.add;
+import static eu.deltasorce.internship.library.repository.AuthorRepository.delete;
+
+/**
+ * Controller which takes commands and runs them
+ */
 public class AuthorController {
     private Author author;
 
-    public void addAuthor(String name, String country, String birthDate) {
+    public boolean commandAdd(String name, String country, LocalDate birthDate) {
         author = new Author(name, country, birthDate);
-        AuthorService.addAuthor(author);
+        return add(author);
     }
 
-    public void addAuthor(String name, String country, String birthDate, String deathDate) {
+    public boolean commandAdd(String name, String country, LocalDate birthDate, LocalDate deathDate) {
         author = new Author(name, country, birthDate, deathDate);
-        AuthorService.addAuthor(author);
+        return add(author);
     }
 
-    public void deleteAuthor(String name, String country, String birthDate) {
+    public boolean commandDelete(String name, String country, LocalDate birthDate) {
         author = new Author(name, country, birthDate);
-        AuthorService.deleteAuthor(author);
+        return delete(author);
     }
 
-    public void deleteAuthor(String name, String country, String birthDate, String deathDate) {
+    public boolean commandDelete(String name, String country, LocalDate birthDate, LocalDate deathDate) {
         author = new Author(name, country, birthDate, deathDate);
-        AuthorService.deleteAuthor(author);
+        return delete(author);
     }
 }

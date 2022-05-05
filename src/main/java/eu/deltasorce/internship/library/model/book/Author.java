@@ -2,8 +2,12 @@ package eu.deltasorce.internship.library.model.book;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Class Author which gives information about Author of books
+ */
 @Getter
 public class Author {
 
@@ -11,17 +15,34 @@ public class Author {
 
     private String country;
 
-    private String birthDate;
+    private LocalDate birthDate;
 
-    private String deathDate;
+    private LocalDate deathDate;
 
-    public Author(String name, String country, String birthDate) {
+
+    /**
+     * Constructor for the Author class
+     *
+     * @param name        The name of the author
+     * @param country     The country the author is from
+     * @param birthDate    The birthdate of the author
+     */
+    public Author(String name, String country, LocalDate birthDate) {
         setFullName(name);
         setCountry(country);
         setBirthDate(birthDate);
     }
 
-    public Author(String name, String country, String birthDate, String deathDate) {
+    /**
+     * Constructor for the Author class
+     *
+     * @param name        The name of the author
+     * @param country     The country the author is from
+     * @param birthDate The birthdate of the author
+     * @param deathDate The day author died
+     */
+
+    public Author(String name, String country, LocalDate birthDate, LocalDate deathDate) {
         this(name, country, birthDate);
         setDeathDate(deathDate);
     }
@@ -40,15 +61,15 @@ public class Author {
         this.country = country;
     }
 
-    public void setBirthDate(String birthDate) {
-        if (birthDate == null || birthDate.isBlank()) {
+    public void setBirthDate(LocalDate birthDate) {
+        if (birthDate == null) {
             throw new IllegalArgumentException("Birth date can't be empty!");
         }
         this.birthDate = birthDate;
     }
 
-    public void setDeathDate(String deathDate) {
-        if (deathDate == null || deathDate.isBlank()) {
+    public void setDeathDate(LocalDate deathDate) {
+        if (deathDate == null) {
             throw new IllegalArgumentException("Death date can't be empty!");
         }
         this.deathDate = deathDate;

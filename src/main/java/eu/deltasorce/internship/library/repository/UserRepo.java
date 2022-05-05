@@ -8,11 +8,11 @@ import java.util.List;
 public class UserRepo {
     private static List<User> users = new ArrayList<>();
 
-    public void addUser(User user) {
-        users.add(user);
+    public boolean add(User user) {
+       return users.add(user);
     }
 
-    public void deleteBook(User user) {
-        users.remove(user);
+    public boolean delete(User user) {
+       return users.remove(user);
     }
 }

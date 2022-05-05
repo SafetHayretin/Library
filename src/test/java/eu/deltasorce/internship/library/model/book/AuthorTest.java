@@ -3,68 +3,75 @@ package eu.deltasorce.internship.library.model.book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuthorTest {
 
     @Test
-    void creatingAuthorWithEmptyNameShouldReturnException(){
+    void creatingAuthorWithEmptyNameShouldReturnException() {
         //Given
         String name = "";
         String country = "UK";
-        String birthDate = "12.1.1977";
+        LocalDate birthDate = LocalDate.parse("1974-09-23");
+
         //When
         Executable nameThrowsIllegalArgument = () -> new Author(name, country, birthDate);
 
         //Then
-        assertThrows( IllegalArgumentException.class, nameThrowsIllegalArgument);
+        assertThrows(IllegalArgumentException.class, nameThrowsIllegalArgument);
     }
 
     @Test
-    void creatingAuthorWithEmptyCountryShouldReturnException(){
+    void creatingAuthorWithEmptyCountryShouldReturnException() {
         //Given
         String name = "JK Rowling";
         String country = "";
-        String birthDate = "12.1.1977";
+        LocalDate birthDate = LocalDate.parse("1974-09-23");
+
         //When
         Executable countryThrowsIllegalArgument = () -> new Author(name, country, birthDate);
 
         //Then
-        assertThrows( IllegalArgumentException.class, countryThrowsIllegalArgument);
+        assertThrows(IllegalArgumentException.class, countryThrowsIllegalArgument);
     }
 
     @Test
-    void creatingAuthorWithEmptyBirthDateShouldReturnException(){
+    void creatingAuthorWithEmptyBirthDateShouldReturnException() {
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
-        String birthDate = "";
+        LocalDate birthDate = null;
+
         //When
         Executable birthDateThrowsIllegalArgument = () -> new Author(name, country, birthDate);
 
         //Then
-        assertThrows( IllegalArgumentException.class, birthDateThrowsIllegalArgument);
+        assertThrows(IllegalArgumentException.class, birthDateThrowsIllegalArgument);
     }
 
     @Test
-    void creatingAuthorWithEmptyDeathDateShouldReturnException(){
+    void creatingAuthorWithEmptyDeathDateShouldReturnException() {
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
-        String birthDate = "12.01.1977";
-        String deathDate = "";
+        LocalDate birthDate = LocalDate.parse("1974-09-23");
+        LocalDate deathDate = null;
+
         //When
         Executable deathDateThrowsIllegalArgument = () -> new Author(name, country, birthDate, deathDate);
 
         //Then
-        assertThrows( IllegalArgumentException.class, deathDateThrowsIllegalArgument);
+        assertThrows(IllegalArgumentException.class, deathDateThrowsIllegalArgument);
     }
 
     @Test
-    void comparingTwoAuthorsShouldReturnTrue(){
+    void comparingTwoAuthorsShouldReturnTrue() {
         //Given
-        Author author = new Author("Pablo Neruda", "Chile", "12.05.1904", "23.09.1973" );
-        Author author1 = new Author("Pablo Neruda", "Chile", "12.05.1904", "23.09.1973");
+        Author author = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
+        Author author1 = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
 
         //When
         boolean isAuthorEqual = author.equals(author1);
@@ -74,10 +81,10 @@ class AuthorTest {
     }
 
     @Test
-    void comparingTwoAuthorsHashCodeShouldReturnTrue(){
+    void comparingTwoAuthorsHashCodeShouldReturnTrue() {
         //Given
-        Author author = new Author("Pablo Neruda", "Chile", "12.05.1904", "23.09.1973" );
-        Author author1 = new Author("Pablo Neruda", "Chile", "12.05.1904", "23.09.1973");
+        Author author = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
+        Author author1 = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
 
         //When
         boolean isAuthorsHashEqual = author.hashCode() == author1.hashCode();

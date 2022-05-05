@@ -5,6 +5,7 @@ import eu.deltasorce.internship.library.model.book.PaperBook;
 import eu.deltasorce.internship.library.utilities.Sex;
 
 import java.util.List;
+import java.util.Objects;
 
 public class User {
     private LoginData login;
@@ -59,5 +60,18 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return age == user.age && login.equals(user.login) && name.equals(user.name) && sex == user.sex && address.equals(user.address) && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, name, age, sex, address, email);
     }
 }

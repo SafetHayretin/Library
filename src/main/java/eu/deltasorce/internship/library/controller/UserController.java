@@ -1,8 +1,9 @@
 package eu.deltasorce.internship.library.controller;
 
-import eu.deltasorce.internship.library.model.user.User;
+import eu.deltasorce.internship.library.service.UserService;
 
 public class UserController {
-    private User user;
-
+    public boolean login(){
+        UserService.login();
+    }
 }
