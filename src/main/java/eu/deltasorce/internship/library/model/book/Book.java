@@ -1,27 +1,32 @@
-package eu.deltasorce.internship.library.book;
+package eu.deltasorce.internship.library.model.book;
 
-import eu.deltasorce.internship.library.author.AuthorModel;
-
-public abstract class BookModel {
+public abstract class Book {
     private String bookTitle;
-    private AuthorModel author;
+    private Author author;
     private String genre;
     private String summary;
-    private final int ISBN;
+    private int isbn;
 
-    public BookModel(String bookTitle, AuthorModel author, String genre, String summary, int isbn) {
+    public Book(String bookTitle, Author author, String genre, String summary, int isbn) {
         setBookTitle(bookTitle);
         setAuthor(author);
         setGenre(genre);
         setSummary(summary);
-        ISBN = isbn;
+        this.isbn = isbn;
+    }
+
+    public Book(String bookTitle, Author author, String genre, String summary) {
+        setBookTitle(bookTitle);
+        setAuthor(author);
+        setGenre(genre);
+        setSummary(summary);
     }
 
     public void setBookTitle(String bookTitle) {
         this.bookTitle = bookTitle;
     }
 
-    public void setAuthor(AuthorModel author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -32,4 +37,5 @@ public abstract class BookModel {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
 }
