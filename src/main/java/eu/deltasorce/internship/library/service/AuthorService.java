@@ -4,6 +4,7 @@ import eu.deltasorce.internship.library.model.book.Author;
 import eu.deltasorce.internship.library.repository.AuthorRepository;
 
 public class AuthorService {
+
     public boolean add(Author author){
         return AuthorRepository.add(author);
     }
@@ -14,5 +15,9 @@ public class AuthorService {
 
     public boolean deleteById(int index){
         return AuthorRepository.deleteById(index);
+    }
+
+    public Author getAuthorFromRepository(String name) {
+        return AuthorRepository.getAuthor(name);
     }
 }

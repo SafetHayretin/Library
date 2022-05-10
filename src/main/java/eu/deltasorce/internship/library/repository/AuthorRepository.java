@@ -22,9 +22,18 @@ public final class AuthorRepository {
         return authors.remove(author);
     }
 
-    public static boolean  deleteById(int index){
+    public static boolean deleteById(int index) {
         Author author = authors.get(index);
         return authors.remove(author);
+    }
+
+    public static Author getAuthor(String name) {
+        for (Author author : authors) {
+            if (name.equals(author.getFullName())) {
+                return author;
+            }
+        }
+        return null;
     }
 
     public static int numberOfAuthors() {
