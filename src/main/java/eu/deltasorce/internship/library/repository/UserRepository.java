@@ -5,7 +5,7 @@ import eu.deltasorce.internship.library.model.user.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepo {
+public class UserRepository {
     private static List<User> users = new ArrayList<>();
 
     public boolean add(User user) {

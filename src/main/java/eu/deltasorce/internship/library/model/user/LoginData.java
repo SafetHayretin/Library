@@ -1,5 +1,7 @@
 package eu.deltasorce.internship.library.model.user;
 
+import java.util.Objects;
+
 public class LoginData {
     private String username;
     private String password;
@@ -21,5 +23,18 @@ public class LoginData {
             throw new IllegalArgumentException("Password can't be less than 8 characters!");
         }
             this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LoginData)) return false;
+        LoginData loginData = (LoginData) o;
+        return username.equals(loginData.username) && password.equals(loginData.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password);
     }
 }

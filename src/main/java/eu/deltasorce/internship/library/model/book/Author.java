@@ -6,7 +6,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Class Author which gives information about Author of books
+ * Author which gives information about Author of books
+ * Contains base way of creating author
+ * Have validations for the parameters
+ * Have Equals and Hashcode
  */
 @Getter
 public class Author {
@@ -19,9 +22,8 @@ public class Author {
 
     private LocalDate deathDate;
 
-
     /**
-     * Constructor for the Author class
+     * Base way to creating author who is still alive
      *
      * @param name        The name of the author
      * @param country     The country the author is from
@@ -34,14 +36,13 @@ public class Author {
     }
 
     /**
-     * Constructor for the Author class
+     * Contains the base constructor for alive author and just adds death date for dead author
      *
      * @param name        The name of the author
      * @param country     The country the author is from
      * @param birthDate The birthdate of the author
      * @param deathDate The day author died
      */
-
     public Author(String name, String country, LocalDate birthDate, LocalDate deathDate) {
         this(name, country, birthDate);
         setDeathDate(deathDate);
@@ -71,6 +72,9 @@ public class Author {
     public void setDeathDate(LocalDate deathDate) {
         if (deathDate == null) {
             throw new IllegalArgumentException("Death date can't be empty!");
+        }
+        if (deathDate.isBefore(birthDate)){
+            throw new IllegalArgumentException("Death date can't be before birthDate");
         }
         this.deathDate = deathDate;
     }

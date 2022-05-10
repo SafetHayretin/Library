@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AuthorTest {
 
     @Test
-    void creatingAuthorWithEmptyNameShouldReturnException() {
+    void creatingAuthorWithEmptyNameShouldFail() {
         //Given
         String name = "";
         String country = "UK";
@@ -25,7 +25,7 @@ class AuthorTest {
     }
 
     @Test
-    void creatingAuthorWithEmptyCountryShouldReturnException() {
+    void creatingAuthorWithEmptyCountryShouldFail() {
         //Given
         String name = "JK Rowling";
         String country = "";
@@ -39,7 +39,7 @@ class AuthorTest {
     }
 
     @Test
-    void creatingAuthorWithEmptyBirthDateShouldReturnException() {
+    void creatingAuthorWithEmptyBirthDateShouldFail() {
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
@@ -53,7 +53,7 @@ class AuthorTest {
     }
 
     @Test
-    void creatingAuthorWithEmptyDeathDateShouldReturnException() {
+    void creatingAuthorWithEmptyDeathDateShouldFail() {
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
@@ -65,6 +65,21 @@ class AuthorTest {
 
         //Then
         assertThrows(IllegalArgumentException.class, deathDateThrowsIllegalArgument);
+    }
+
+    @Test
+    void creatingAuthorWithDeathDateGreaterThanBirthDateShouldFail() {
+        //Given
+        String name = "JK Rowling";
+        String country = "United Kingdom";
+        LocalDate birthDate = LocalDate.parse("1974-09-23");
+        LocalDate deathDate = LocalDate.parse("1935-08-24");
+
+        //When
+        Executable deathDateThrowsException = () -> new Author(name, country, birthDate, deathDate);
+
+        //Then
+        assertThrows(IllegalArgumentException.class, deathDateThrowsException);
     }
 
     @Test

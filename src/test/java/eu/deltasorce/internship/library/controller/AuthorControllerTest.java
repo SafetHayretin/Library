@@ -1,18 +1,20 @@
 package eu.deltasorce.internship.library.controller;
 
+import eu.deltasorce.internship.library.repository.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static eu.deltasorce.internship.library.repository.AuthorRepository.clearAuthorRepo;
+import static eu.deltasorce.internship.library.repository.AuthorRepository.clear;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuthorControllerTest {
 
     @BeforeEach
     void emptyAuthorCollection() {
-        clearAuthorRepo();
+        clear();
     }
 
     @Test
@@ -25,7 +27,7 @@ class AuthorControllerTest {
         LocalDate deathDate = LocalDate.parse("1973-09-23");
 
         //When
-        boolean success = controller.commandAdd(name, country, birthDate, deathDate);
+        boolean success = controller.add(name, country, birthDate, deathDate);
 
         //Then
         assertTrue(success);
@@ -40,7 +42,7 @@ class AuthorControllerTest {
         LocalDate birthDate = LocalDate.parse("1964-05-12");
 
         //When
-        boolean success = controller.commandAdd(name, country, birthDate);
+        boolean success = controller.add(name, country, birthDate);
 
         //Then
         assertTrue(success);
@@ -55,10 +57,10 @@ class AuthorControllerTest {
         LocalDate birthDate = LocalDate.parse("1904-05-12");
         LocalDate deathDate = LocalDate.parse("1973-09-23");
 
-        controller.commandAdd(name, country, birthDate, deathDate);
+        controller.add(name, country, birthDate, deathDate);
 
         //When
-        boolean success = controller.commandDelete(name, country, birthDate, deathDate);
+        boolean success = controller.delete(name, country, birthDate, deathDate);
 
         //Then
         assertTrue(success);
@@ -72,12 +74,37 @@ class AuthorControllerTest {
         String country = "Chile";
         LocalDate birthDate = LocalDate.parse("1904-05-12");
 
-        controller.commandAdd(name, country, birthDate);
+        controller.add(name, country, birthDate);
 
         //When
-        boolean success = controller.commandDelete(name, country, birthDate);
+        boolean success = controller.delete(name, country, birthDate);
 
         //Then
+        assertEquals(0, AuthorRepository.numberOfAuthors());
+        assertTrue(success);
+    }
+
+    @Test
+    void authorShouldBeDeletedByIndex() {
+        //Given
+        AuthorController controller = new AuthorController();
+        String pablo = "Pablo Neruda";
+        String chile = "Chile";
+        LocalDate birthDate = LocalDate.parse("1904-05-12");
+
+        String rowling = "JK Rowling";
+        String unitedKingdom = "United Kingdom";
+        LocalDate birthDate1 = LocalDate.parse("1965-05-12");
+
+        controller.add(pablo, chile, birthDate);
+        controller.add(rowling, unitedKingdom, birthDate1);
+        assertEquals(2, AuthorRepository.numberOfAuthors());
+
+        //When
+        boolean success = controller.deleteById(1);
+
+        //Then
+        assertEquals(1, AuthorRepository.numberOfAuthors());
         assertTrue(success);
     }
 }

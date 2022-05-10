@@ -2,15 +2,17 @@ package eu.deltasorce.internship.library.repository;
 
 import eu.deltasorce.internship.library.model.book.Author;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Repository where all authors are stored
+ * Class who contains List of Author
+ * Have ways to add and delete Authors
+ * Have way of emptying repository
  */
 public final class AuthorRepository {
 
-    private static final Set<Author> authors = new HashSet<>();
+    private static final List<Author> authors = new ArrayList<>();
 
     public static boolean add(Author author) {
         return authors.add(author);
@@ -20,11 +22,16 @@ public final class AuthorRepository {
         return authors.remove(author);
     }
 
-    public static int getCollectionLength() {
+    public static boolean  deleteById(int index){
+        Author author = authors.get(index);
+        return authors.remove(author);
+    }
+
+    public static int numberOfAuthors() {
         return authors.size();
     }
 
-    public static void clearAuthorRepo() {
+    public static void clear() {
         authors.clear();
     }
 }
