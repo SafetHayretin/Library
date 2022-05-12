@@ -4,13 +4,18 @@ import lombok.Getter;
 
 @Getter
 public class PaperBook extends Book {
+
     private int totalCount;
+
     private int availableCount;
 
-    public PaperBook(String bookTitle, Author author, String genre, String summary, String isbn, int totalCount, int availableCount) {
-        super(bookTitle, author, genre, summary, isbn);
+    private int borrowedCount;
+
+    public PaperBook(String title, Author author, String genre, String summary, String isbn, int totalCount, int availableCount) {
+        super(title, author, genre, summary, isbn);
         this.setTotalCount(totalCount);
         this.setAvailableCount(availableCount);
+        borrowedCount = totalCount - availableCount;
     }
 
     public void setTotalCount(int totalCount) {
@@ -33,4 +38,14 @@ public class PaperBook extends Book {
         this.availableCount = availableCount;
     }
 
+    public void updateAvailableCount(String command) {
+        if(command.equals("return")) {
+            availableCount++;
+            borrowedCount--;
+        }
+        if(command.equals("borrow")) {
+            availableCount--;
+            borrowedCount++;
+        }
+    }
 }

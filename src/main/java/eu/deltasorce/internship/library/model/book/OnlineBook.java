@@ -4,16 +4,18 @@ import lombok.Getter;
 
 @Getter
 public class OnlineBook extends Book {
+
     private String readLink;
+
     private String downloadLink;
 
-    public OnlineBook(String bookTitle, Author author, String genre, String summary, String readLink) {
-        super(bookTitle, author, genre, summary);
+    public OnlineBook(String bookTitle, Author author, String genre, String summary, String isbn, String readLink) {
+        super(bookTitle, author, genre, summary, isbn);
         setReadLink(readLink);
     }
 
-    public OnlineBook(String bookTitle, Author author, String genre, String summary, String readLink, String downloadLink) {
-        this(bookTitle, author, genre, summary, readLink);
+    public OnlineBook(String bookTitle, Author author, String genre, String summary, String isbn, String readLink, String downloadLink) {
+        this(bookTitle, author, genre, summary, isbn, readLink);
         setDownloadLink(downloadLink);
     }
 
