@@ -41,12 +41,8 @@ public class BookService {
         return BookRepository.add(book);
     }
 
-    public boolean deleteById(int index) {
-        return BookRepository.deleteById(index);
-    }
-
-    public boolean deleteByTitle(String title) {
-        return BookRepository.deleteByName(title);
+    public boolean deleteByIsbn(String isbn) {
+        return BookRepository.deleteByIsbn(isbn);
     }
 
     /**

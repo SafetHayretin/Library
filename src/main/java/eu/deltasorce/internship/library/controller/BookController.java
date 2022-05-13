@@ -37,11 +37,8 @@ public class BookController {
         return service.addPaperBook(title, authorName, genre, summary, isbn, total);
     }
 
-    public boolean deleteBookById(int index) {
-        return service.deleteById(index);
+    public boolean deleteBookByIsbn(String isbn) {
+        return service.deleteByIsbn(isbn);
     }
 
-    public boolean deleteBookByName(String title) {
-        return service.deleteByTitle(title);
-    }
 }

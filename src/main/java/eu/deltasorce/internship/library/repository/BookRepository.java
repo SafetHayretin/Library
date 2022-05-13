@@ -15,14 +15,9 @@ public final class BookRepository {
         return books.add(book);
     }
 
-    public static boolean deleteById(int index) {
-        Book book = books.get(index);
-        return books.remove(book);
-    }
-
-    public static boolean deleteByName(String title) {
+    public static boolean deleteByIsbn(String isbn) {
         for (Book book : books) {
-            if (title.equals(book.getTitle())) {
+            if (isbn.equals(book.getIsbn())) {
                 return books.remove(book);
             }
         }

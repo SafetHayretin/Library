@@ -9,7 +9,9 @@ import java.time.LocalDate;
  * Class who is responsible for the commands
  */
 public class AuthorController {
+
     private Author author;
+
     private final AuthorService service = new AuthorService();
 
     public boolean add(String name, String country, LocalDate birthDate) {

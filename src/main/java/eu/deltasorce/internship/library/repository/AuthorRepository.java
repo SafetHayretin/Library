@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class who contains List of Author
+ * Contains all Authors
  * Have ways to add and delete Authors
  * Have way of emptying repository
  */
