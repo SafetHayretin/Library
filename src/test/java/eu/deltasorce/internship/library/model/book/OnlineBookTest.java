@@ -5,7 +5,8 @@ import org.junit.jupiter.api.function.Executable;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OnlineBookTest {
 
@@ -25,6 +26,7 @@ class OnlineBookTest {
 
     @Test
     void creatingOnlineBookWithEmptyReadLinkShouldFail() {
+
         //Given
         readLink = null;
 
@@ -37,6 +39,7 @@ class OnlineBookTest {
 
     @Test
     void creatingOnlineBookWithEmptyDownloadLinkShouldFail() {
+
         //Given
         downloadLink = null;
 
@@ -49,6 +52,7 @@ class OnlineBookTest {
 
     @Test
     void creatingOnlineBookWithoutProblemsShouldNotFail() {
+
         //When
         Executable nameThrowsIllegalArgument = () -> new OnlineBook(title, author, genre, summary, isbn, readLink, downloadLink);
 

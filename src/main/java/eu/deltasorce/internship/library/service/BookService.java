@@ -10,34 +10,24 @@ import java.util.List;
 
 public class BookService {
 
-    AuthorService service = new AuthorService();
+    private final AuthorService service = new AuthorService();
 
     /**
      * First gets author from repository searching by name
      * Then creates book without download link
      * If download link is given adds it to book
-     * @param readLink Link where you can read book online
-     * @param downloadLink Link where you can download book for free
      * @return true/false if book is added to repository or failed
      */
-    public boolean addOnlineBook(String name, String authorName, String genre, String summary, String isbn, String readLink, String downloadLink) {
-        Author author = service.getAuthorFromRepository(authorName);
-        OnlineBook book = new OnlineBook(name, author, genre, summary, isbn, readLink);
-        if (downloadLink != null) {
-            book.setDownloadLink(downloadLink);
-        }
+    public boolean addOnlineBook(OnlineBook book) {
         return BookRepository.add(book);
     }
 
     /**
      * Created book and adds it to repository
      * Sets book available count equal to total count
-     * @param total Copies of paper book
      * @return true/false if book is added to repository or failed
      */
-    public boolean addPaperBook(String name, String authorName, String genre, String summary, String isbn, int total) {
-        Author author = service.getAuthorFromRepository(authorName);
-        Book book = new PaperBook(name, author, genre, summary, isbn, total, total);
+    public boolean addPaperBook(PaperBook book) {
         return BookRepository.add(book);
     }
 
@@ -51,7 +41,7 @@ public class BookService {
      * @return Link where book can be read
      */
     public String readBookOnline(String title) {
-        List<OnlineBook> onlineBooks = BookRepository.onlineBooks();
+        List<OnlineBook> onlineBooks = BookRepository.findOnlineBooks();
         for (OnlineBook book : onlineBooks) {
             if (title.equals(book.getTitle())) {
                 return book.getReadLink();
@@ -66,7 +56,7 @@ public class BookService {
      * @return Link where book can be downloaded
      */
     public String downloadBook(String title) {
-        List<OnlineBook> onlineBooks = BookRepository.onlineBooks();
+        List<OnlineBook> onlineBooks = BookRepository.findOnlineBooks();
         for (OnlineBook book : onlineBooks) {
             if (title.equals(book.getTitle())) {
                 return book.getDownloadLink();

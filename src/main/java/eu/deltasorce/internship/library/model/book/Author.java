@@ -36,7 +36,7 @@ public class Author {
     }
 
     /**
-     * Contains the base constructor for alive author and just adds death date for dead author
+     * Base way to creating author who is not alive
      *
      * @param name        The name of the author
      * @param country     The country the author is from

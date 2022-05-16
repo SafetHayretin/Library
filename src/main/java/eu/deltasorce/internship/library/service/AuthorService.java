@@ -13,11 +13,11 @@ public class AuthorService {
         return AuthorRepository.delete(author);
     }
 
-    public boolean deleteById(int index){
-        return AuthorRepository.deleteById(index);
+    public boolean deleteById(int id){
+        return AuthorRepository.deleteById(id);
     }
 
     public Author getAuthorFromRepository(String name) {
-        return AuthorRepository.getAuthor(name);
+        return AuthorRepository.findByName(name);
     }
 }

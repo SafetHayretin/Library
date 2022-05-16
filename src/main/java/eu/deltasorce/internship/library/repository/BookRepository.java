@@ -41,6 +41,7 @@ public final class BookRepository {
 
     /**
      * Goes through book repository to find books with given title
+     *
      * @param title Title of the searched books
      * @return List of books in book repository with given title
      */
@@ -56,6 +57,7 @@ public final class BookRepository {
 
     /**
      * Goes through book repository to find books with given genre
+     *
      * @param genre Genre of the searched books
      * @return List of books in book repository with given genre
      */
@@ -71,9 +73,10 @@ public final class BookRepository {
 
     /**
      * Separates online books from all books
+     *
      * @return List of all online books
      */
-    public static List<OnlineBook> onlineBooks() {
+    public static List<OnlineBook> findOnlineBooks() {
         List<OnlineBook> onlineBooks = new ArrayList<>();
         for (Book book : books) {
             if (book instanceof OnlineBook) {

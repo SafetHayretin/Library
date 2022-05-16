@@ -17,6 +17,7 @@ class AuthorRepositoryTest {
 
     @Test
     void authorShouldBeAddedCorrectlyToRepo() {
+
         //Given
         Author pablo = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
         assertEquals(0, numberOfAuthors());
@@ -29,6 +30,7 @@ class AuthorRepositoryTest {
 
     @Test
     void authorShouldBeDeletedCorrectlyFromRepo() {
+
         //Given
         Author pablo = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"));
         Author rowling = new Author("JK Rowling", "UK", LocalDate.parse("1965-07-31"));

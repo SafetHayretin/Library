@@ -9,22 +9,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PaperBookTest {
 
-    String title = "Harry Potter";
+    private String title = "Harry Potter";
 
-    Author author = new Author("JK Rowling", "UK", LocalDate.parse("1974-09-23"));
+    private Author author = new Author("JK Rowling", "UK", LocalDate.parse("1974-09-23"));
 
-    String genre = "Adventure";
+    private String genre = "Adventure";
 
-    String summary = "Adaptation of the first of J.K. Rowling's popular children's novels about Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own.";
+    private String summary = "Adaptation of the first of J.K. Rowling's popular children's novels about Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own.";
 
-    String isbn = "9781234567897";
+    private String isbn = "9781234567897";
 
-    int total = 4;
+    private int total = 4;
 
-    int available = 4;
+    private int available = 4;
 
     @Test
     void creatingPaperBookWithEmptyTitleShouldFail() {
+
         //Given
         title = "";
 
@@ -37,6 +38,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookWithNullAuthorShouldFail() {
+
         //Given
         author = null;
 
@@ -49,6 +51,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookWithEmptyGenreShouldFail() {
+
         //Given
         genre = "";
 
@@ -61,6 +64,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookWithEmptySummaryShouldFail() {
+
         //Given
         summary = "";
 
@@ -73,6 +77,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookWithEmptyIsbnShouldFail() {
+
         //Given
         isbn = "";
 
@@ -85,6 +90,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookWithTotalCountLessThanAvailableCountShouldFail() {
+
         //Given
         total = 3;
 
@@ -97,6 +103,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookWithAvailableCountMoreThanTotalCountShouldFail() {
+
         //Given
         available = 5;
 
@@ -109,6 +116,7 @@ class PaperBookTest {
 
     @Test
     void creatingPaperBookShouldNotFail() {
+
         //When
         Executable nameThrowsIllegalArgument = () -> new PaperBook(title, author, genre, summary, isbn, total, available);
 
@@ -118,11 +126,12 @@ class PaperBookTest {
 
     @Test
     void availableCountShouldBeThreeAfterBorrowing() {
+
         //Given
         PaperBook harryPotter = new PaperBook(title, author, genre, summary, isbn, total, available);
 
         //When
-        harryPotter.updateAvailableCount("borrow");
+        harryPotter.updateCountAfterBorrow();
 
         //Then
         assertEquals(3, harryPotter.getAvailableCount());
@@ -131,13 +140,14 @@ class PaperBookTest {
 
     @Test
     void borrowedCountShouldBeThreeAfterBorrowingThreeTimes() {
+
         //Given
         PaperBook harryPotter = new PaperBook(title, author, genre, summary, isbn, total, available);
-        harryPotter.updateAvailableCount("borrow");
-        harryPotter.updateAvailableCount("borrow");
+        harryPotter.updateCountAfterBorrow();
+        harryPotter.updateCountAfterBorrow();
 
         //When
-        harryPotter.updateAvailableCount("borrow");
+        harryPotter.updateCountAfterBorrow();
 
         //Then
         assertEquals(1, harryPotter.getAvailableCount());
@@ -146,13 +156,14 @@ class PaperBookTest {
 
     @Test
     void borrowedCountShouldBeOneAfterReturningBook() {
+
         //Given
         PaperBook harryPotter = new PaperBook(title, author, genre, summary, isbn, total, available);
-        harryPotter.updateAvailableCount("borrow");
-        harryPotter.updateAvailableCount("borrow");
+        harryPotter.updateCountAfterBorrow();
+        harryPotter.updateCountAfterBorrow();
 
         //When
-        harryPotter.updateAvailableCount("return");
+        harryPotter.updateCountAfterReturn();
 
         //Then
         assertEquals(3, harryPotter.getAvailableCount());

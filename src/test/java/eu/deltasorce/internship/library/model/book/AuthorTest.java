@@ -1,5 +1,6 @@
 package eu.deltasorce.internship.library.model.book;
 
+import eu.deltasorce.internship.library.model.book.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -12,6 +13,7 @@ class AuthorTest {
 
     @Test
     void creatingAuthorWithEmptyNameShouldFail() {
+
         //Given
         String name = "";
         String country = "UK";
@@ -26,6 +28,7 @@ class AuthorTest {
 
     @Test
     void creatingAuthorWithEmptyCountryShouldFail() {
+
         //Given
         String name = "JK Rowling";
         String country = "";
@@ -40,6 +43,7 @@ class AuthorTest {
 
     @Test
     void creatingAuthorWithEmptyBirthDateShouldFail() {
+
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
@@ -54,6 +58,7 @@ class AuthorTest {
 
     @Test
     void creatingAuthorWithEmptyDeathDateShouldFail() {
+
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
@@ -69,6 +74,7 @@ class AuthorTest {
 
     @Test
     void creatingAuthorWithDeathDateGreaterThanBirthDateShouldFail() {
+
         //Given
         String name = "JK Rowling";
         String country = "United Kingdom";
@@ -84,6 +90,7 @@ class AuthorTest {
 
     @Test
     void comparingTwoAuthorsShouldReturnTrue() {
+
         //Given
         Author author = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
         Author author1 = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
@@ -97,6 +104,7 @@ class AuthorTest {
 
     @Test
     void comparingTwoAuthorsHashCodeShouldReturnTrue() {
+
         //Given
         Author author = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));
         Author author1 = new Author("Pablo Neruda", "Chile", LocalDate.parse("1904-05-12"), LocalDate.parse("1974-09-23"));

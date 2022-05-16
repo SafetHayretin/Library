@@ -38,14 +38,13 @@ public class PaperBook extends Book {
         this.availableCount = availableCount;
     }
 
-    public void updateAvailableCount(String command) {
-        if(command.equals("return")) {
+    public void updateCountAfterReturn(){
             availableCount++;
             borrowedCount--;
-        }
-        if(command.equals("borrow")) {
-            availableCount--;
-            borrowedCount++;
-        }
+    }
+
+    public void updateCountAfterBorrow(){
+        availableCount--;
+        borrowedCount++;
     }
 }
