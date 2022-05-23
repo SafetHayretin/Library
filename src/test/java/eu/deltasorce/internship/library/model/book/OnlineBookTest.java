@@ -38,19 +38,6 @@ class OnlineBookTest {
     }
 
     @Test
-    void creatingOnlineBookWithEmptyDownloadLinkShouldFail() {
-
-        //Given
-        downloadLink = null;
-
-        //When
-        Executable nameThrowsIllegalArgument = () -> new OnlineBook(title, author, genre, summary, isbn, readLink, downloadLink);
-
-        //Then
-        assertThrows(IllegalArgumentException.class, nameThrowsIllegalArgument);
-    }
-
-    @Test
     void creatingOnlineBookWithoutProblemsShouldNotFail() {
 
         //When

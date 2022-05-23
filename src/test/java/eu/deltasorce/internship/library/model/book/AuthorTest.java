@@ -1,6 +1,5 @@
 package eu.deltasorce.internship.library.model.book;
 
-import eu.deltasorce.internship.library.model.book.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -80,6 +79,22 @@ class AuthorTest {
         String country = "United Kingdom";
         LocalDate birthDate = LocalDate.parse("1974-09-23");
         LocalDate deathDate = LocalDate.parse("1935-08-24");
+
+        //When
+        Executable deathDateThrowsException = () -> new Author(name, country, birthDate, deathDate);
+
+        //Then
+        assertThrows(IllegalArgumentException.class, deathDateThrowsException);
+    }
+
+    @Test
+    void creatingAuthorWithDeathDateSameAsBirthDateShouldFail() {
+
+        //Given
+        String name = "JK Rowling";
+        String country = "United Kingdom";
+        LocalDate birthDate = LocalDate.parse("1974-09-23");
+        LocalDate deathDate = LocalDate.parse("1974-09-23");
 
         //When
         Executable deathDateThrowsException = () -> new Author(name, country, birthDate, deathDate);

@@ -17,7 +17,7 @@ public final class BookRepository {
 
     public static boolean deleteByIsbn(String isbn) {
         for (Book book : books) {
-            if (isbn.equals(book.getIsbn())) {
+            if (book.getIsbn().equals(isbn)) {
                 return books.remove(book);
             }
         }
@@ -32,7 +32,7 @@ public final class BookRepository {
     public static List<Book> getBooksByAuthor(Author author) {
         List<Book> result = new ArrayList<>();
         for (Book book : books) {
-            if (author.equals(book.getAuthor())) {
+            if (book.getAuthor().equals(author)) {
                 result.add(book);
             }
         }
@@ -48,7 +48,7 @@ public final class BookRepository {
     public static List<Book> getBooksByTitle(String title) {
         List<Book> result = new ArrayList<>();
         for (Book book : books) {
-            if (title.equals(book.getTitle())) {
+            if (book.getTitle().equals(title)) {
                 result.add(book);
             }
         }
@@ -64,7 +64,7 @@ public final class BookRepository {
     public static List<Book> getBooksByGenre(String genre) {
         List<Book> result = new ArrayList<>();
         for (Book book : books) {
-            if (genre.equals(book.getGenre())) {
+            if (book.getGenre().equals(genre)) {
                 result.add(book);
             }
         }
@@ -88,6 +88,26 @@ public final class BookRepository {
 
     public static int numberOfBooks() {
         return books.size();
+    }
+
+    public static String findReadableLinkByIsbn(String isbn) {
+        List<OnlineBook> onlineBooks = BookRepository.findOnlineBooks();
+        for (OnlineBook book : onlineBooks) {
+            if (isbn.equals(book.getIsbn())) {
+                return book.getReadLink();
+            }
+        }
+        return null;
+    }
+
+    public static String findDownloadLinkByIsbn(String isbn) {
+        List<OnlineBook> onlineBooks = BookRepository.findOnlineBooks();
+        for (OnlineBook book : onlineBooks) {
+            if (isbn.equals(book.getIsbn())) {
+                return book.getDownloadLink();
+            }
+        }
+        return null;
     }
 
     public static void clear() {

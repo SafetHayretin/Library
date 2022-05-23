@@ -135,7 +135,7 @@ class PaperBookTest {
 
         //Then
         assertEquals(3, harryPotter.getAvailableCount());
-        assertEquals(1, harryPotter.getBorrowedCount());
+        assertEquals(1, harryPotter.borrowedCount());
     }
 
     @Test
@@ -151,7 +151,7 @@ class PaperBookTest {
 
         //Then
         assertEquals(1, harryPotter.getAvailableCount());
-        assertEquals(3, harryPotter.getBorrowedCount());
+        assertEquals(3, harryPotter.borrowedCount());
     }
 
     @Test
@@ -167,6 +167,6 @@ class PaperBookTest {
 
         //Then
         assertEquals(3, harryPotter.getAvailableCount());
-        assertEquals(1, harryPotter.getBorrowedCount());
+        assertEquals(1, harryPotter.borrowedCount());
     }
 }

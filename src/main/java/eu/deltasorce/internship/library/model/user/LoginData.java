@@ -19,10 +19,10 @@ public class LoginData {
     }
 
     public void setPassword(String password) {
-        if (password.length() < 8){
+        if (password.length() < 8) {
             throw new IllegalArgumentException("Password can't be less than 8 characters!");
         }
-            this.password = password;
+        this.password = password;
     }
 
     @Override

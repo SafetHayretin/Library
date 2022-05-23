@@ -23,13 +23,16 @@ public final class AuthorRepository {
     }
 
     public static boolean deleteById(int id) {
+        if (id > authors.size()){
+            return false;
+        }
         Author author = authors.get(id);
         return authors.remove(author);
     }
 
     public static Author findByName(String name) {
         for (Author author : authors) {
-            if (name.equals(author.getFullName())) {
+            if (author.getFullName().equals(name)) {
                 return author;
             }
         }

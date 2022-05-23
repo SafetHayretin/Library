@@ -23,8 +23,7 @@ public class BookService {
     }
 
     /**
-     * Created book and adds it to repository
-     * Sets book available count equal to total count
+     * Adds books to repository
      * @return true/false if book is added to repository or failed
      */
     public boolean addPaperBook(PaperBook book) {
@@ -36,18 +35,11 @@ public class BookService {
     }
 
     /**
-     * First gets all online books from repository
      * Goes through all online books and checks for book with same title
      * @return Link where book can be read
      */
-    public String readBookOnline(String title) {
-        List<OnlineBook> onlineBooks = BookRepository.findOnlineBooks();
-        for (OnlineBook book : onlineBooks) {
-            if (title.equals(book.getTitle())) {
-                return book.getReadLink();
-            }
-        }
-        return null;
+    public String findReadableLinkByIsbn(String isbn) {
+        return BookRepository.findReadableLinkByIsbn(isbn);
     }
 
     /**
@@ -55,14 +47,8 @@ public class BookService {
      * Goes through all online books and checks for book with same title
      * @return Link where book can be downloaded
      */
-    public String downloadBook(String title) {
-        List<OnlineBook> onlineBooks = BookRepository.findOnlineBooks();
-        for (OnlineBook book : onlineBooks) {
-            if (title.equals(book.getTitle())) {
-                return book.getDownloadLink();
-            }
-        }
-        return null;
+    public String findDownloadLinkByIsbn(String isbn) {
+        return BookRepository.findDownloadLinkByIsbn(isbn);
     }
 
     public List<Book> searchByAuthorName(String name) {

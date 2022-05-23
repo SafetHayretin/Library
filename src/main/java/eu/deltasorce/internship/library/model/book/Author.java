@@ -25,9 +25,9 @@ public class Author {
     /**
      * Base way to creating author who is still alive
      *
-     * @param name        The name of the author
-     * @param country     The country the author is from
-     * @param birthDate    The birthdate of the author
+     * @param name      The name of the author
+     * @param country   The country the author is from
+     * @param birthDate The birthdate of the author
      */
     public Author(String name, String country, LocalDate birthDate) {
         setFullName(name);
@@ -38,8 +38,8 @@ public class Author {
     /**
      * Base way to creating author who is not alive
      *
-     * @param name        The name of the author
-     * @param country     The country the author is from
+     * @param name      The name of the author
+     * @param country   The country the author is from
      * @param birthDate The birthdate of the author
      * @param deathDate The day author died
      */
@@ -73,8 +73,8 @@ public class Author {
         if (deathDate == null) {
             throw new IllegalArgumentException("Death date can't be empty!");
         }
-        if (deathDate.isBefore(birthDate)){
-            throw new IllegalArgumentException("Death date can't be before birthDate");
+        if (deathDate.isBefore(birthDate) || deathDate.equals(birthDate)) {
+            throw new IllegalArgumentException("Death date must be after birth date!");
         }
         this.deathDate = deathDate;
     }
@@ -84,7 +84,8 @@ public class Author {
         if (this == o) return true;
         if (!(o instanceof Author)) return false;
         Author author = (Author) o;
-        return getFullName().equals(author.getFullName()) && getCountry().equals(author.getCountry()) && getBirthDate().equals(author.getBirthDate()) && Objects.equals(getDeathDate(), author.getDeathDate());
+        return fullName.equals(author.getFullName()) && country.equals(author.getCountry())
+                && birthDate.equals(author.getBirthDate()) && Objects.equals(getDeathDate(), author.getDeathDate());
     }
 
     @Override

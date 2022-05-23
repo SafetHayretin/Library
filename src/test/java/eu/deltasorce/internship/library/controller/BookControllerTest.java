@@ -14,8 +14,7 @@ import org.junit.jupiter.api.function.Executable;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class BookControllerTest {
 
@@ -27,14 +26,14 @@ class BookControllerTest {
 
     private final PaperBook theMysteriousAffair = new PaperBook("The Mysterious Affair at Styles", AuthorRepository.findByName("Agatha Christie"), "Novel", summary, "978020137962", 3, 3);
 
-    private final OnlineBook hamlet = new OnlineBook("Hamlet", AuthorRepository.findByName("William Shakespeare"), "Drama", summary, "978020131547", "www.library.com/hamlet/read");
+    private final OnlineBook hamlet = new OnlineBook("Hamlet", AuthorRepository.findByName("William Shakespeare"), "Drama", summary, "978020131547", "www.library.com/hamlet/read", null);
 
     private final OnlineBook shining = new OnlineBook("The Shining", AuthorRepository.findByName("Stephen King"), "Horror", summary, "978020134875", "www.library.com/theShining/read", "www.library.com/theShining/download");
 
     @BeforeAll
     static void fillAuthorRepository() {
         Author rowling = new Author("JK Rowling", "Britain", LocalDate.parse("1974-09-23"));
-        Author agatha = new Author("Agatha Christie", "Britain", LocalDate.parse("1890-09-15"), LocalDate.parse("1890-09-15"));
+        Author agatha = new Author("Agatha Christie", "Britain", LocalDate.parse("1890-09-15"), LocalDate.parse("1976-01-12"));
         Author william = new Author("William Shakespeare", "England", LocalDate.parse("1564-04-26"), LocalDate.parse("1616-04-24"));
         Author stephen = new Author("Stephen King", "USA", LocalDate.parse("1947-09-21"));
         AuthorRepository.add(rowling);
@@ -139,4 +138,83 @@ class BookControllerTest {
         assertEquals(1, books.size());
     }
 
+    @Test
+    void gettingReadLinkShouldReturnLinkCorrectly() {
+
+        //Given
+        BookRepository.add(harryPotter);
+        BookRepository.add(shining);
+        BookRepository.add(hamlet);
+        BookRepository.add(theMysteriousAffair);
+        assertEquals(4, BookRepository.numberOfBooks());
+        String isbn = "978020131547";
+
+        //When
+        String readLink = controller.getReadLinkByIsbn(isbn);
+
+        //Then
+        assertEquals("www.library.com/hamlet/read", readLink);
+    }
+
+    @Test
+    void gettingDownloadLinkShouldReturnLinkCorrectly() {
+
+        //Given
+        BookRepository.add(harryPotter);
+        BookRepository.add(shining);
+        BookRepository.add(hamlet);
+        BookRepository.add(theMysteriousAffair);
+        assertEquals(4, BookRepository.numberOfBooks());
+        String isbn = "978020134875";
+
+        //When
+        String downloadLink = controller.getDownloadLinkByIsbn(isbn);
+
+        //Then
+        assertEquals("www.library.com/theShining/download", downloadLink);
+    }
+
+    @Test
+    void addingOnlineBookShouldReturnTrue() {
+
+        //Given
+        assertEquals(0, BookRepository.numberOfBooks());
+
+        //When
+        boolean isAdded = controller.addOnlineBook(hamlet);
+
+        //Then
+        assertTrue(isAdded);
+    }
+
+    @Test
+    void addingPaperBookShouldReturnTrue() {
+
+        //Given
+        assertEquals(0, BookRepository.numberOfBooks());
+
+        //When
+        boolean isAdded = controller.addPaperBook(harryPotter);
+
+        //Then
+        assertTrue(isAdded);
+    }
+
+    @Test
+    void deletingBookByIsbnShouldReturnTrue() {
+
+        //Given
+        BookRepository.add(harryPotter);
+        BookRepository.add(shining);
+        BookRepository.add(hamlet);
+        BookRepository.add(theMysteriousAffair);
+        assertEquals(4, BookRepository.numberOfBooks());
+        String isbn = "978020134875";
+
+        //When
+        boolean isDeleted = controller.deleteBookByIsbn(isbn);
+
+        //Then
+        assertTrue(isDeleted);
+    }
 }

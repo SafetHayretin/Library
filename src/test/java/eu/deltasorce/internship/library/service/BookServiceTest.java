@@ -6,8 +6,8 @@ import eu.deltasorce.internship.library.model.book.OnlineBook;
 import eu.deltasorce.internship.library.model.book.PaperBook;
 import eu.deltasorce.internship.library.repository.AuthorRepository;
 import eu.deltasorce.internship.library.repository.BookRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -26,14 +26,14 @@ class BookServiceTest {
 
     private final PaperBook theMysteriousAffair = new PaperBook("The Mysterious Affair at Styles", AuthorRepository.findByName("Agatha Christie"), "Novel", summary, "978020137962", 3, 3);
 
-    private final OnlineBook hamlet = new OnlineBook("Hamlet", AuthorRepository.findByName("William Shakespeare"), "Drama", summary, "978020131547", "www.library.com/hamlet/read");
+    private final OnlineBook hamlet = new OnlineBook("Hamlet", AuthorRepository.findByName("William Shakespeare"), "Drama", summary, "978020131547", "www.library.com/hamlet/read", null);
 
     private final OnlineBook shining = new OnlineBook("The Shining", AuthorRepository.findByName("Stephen King"), "Horror", summary, "978020134875", "www.library.com/theShining/read", "www.library.com/theShining/download");
 
     @BeforeAll
     static void fillAuthorRepository() {
         Author rowling = new Author("JK Rowling", "Britain", LocalDate.parse("1974-09-23"));
-        Author agatha = new Author("Agatha Christie", "Britain", LocalDate.parse("1890-09-15"), LocalDate.parse("1890-09-15"));
+        Author agatha = new Author("Agatha Christie", "Britain", LocalDate.parse("1890-09-15"), LocalDate.parse("1976-01-12"));
         Author william = new Author("William Shakespeare", "England", LocalDate.parse("1564-04-26"), LocalDate.parse("1616-04-24"));
         Author stephen = new Author("Stephen King", "USA", LocalDate.parse("1947-09-21"));
         AuthorRepository.add(rowling);
@@ -42,7 +42,7 @@ class BookServiceTest {
         AuthorRepository.add(stephen);
     }
 
-    @AfterEach
+    @BeforeEach
     void tearDown() {
         clear();
     }
@@ -92,21 +92,6 @@ class BookServiceTest {
     }
 
     @Test
-    void readingBookOnlineShouldReturnLinkCorrectly() {
-
-        //Given
-        assertEquals(0, BookRepository.numberOfBooks());
-        service.addOnlineBook(hamlet);
-        assertEquals(1, BookRepository.numberOfBooks());
-
-        //When
-        String link = service.readBookOnline("Hamlet");
-
-        //Then
-        assertEquals("www.library.com/hamlet/read", link);
-    }
-
-    @Test
     void readingBookOnlineShouldReturnNull() {
 
         //Given
@@ -115,25 +100,10 @@ class BookServiceTest {
         assertEquals(1, BookRepository.numberOfBooks());
 
         //When
-        String link = service.readBookOnline("Hamlet");
+        String link = service.findReadableLinkByIsbn("Hamlet");
 
         //Then
         assertNull(link);
-    }
-
-    @Test
-    void downloadBookShouldReturnLinkCorrectly() {
-
-        //Given
-        assertEquals(0, BookRepository.numberOfBooks());
-        service.addOnlineBook(shining);
-        assertEquals(1, BookRepository.numberOfBooks());
-
-        //When
-        String link = service.downloadBook("The Shining");
-
-        //Then
-        assertEquals("www.library.com/theShining/download", link);
     }
 
     @Test
@@ -145,7 +115,7 @@ class BookServiceTest {
         assertEquals(1, BookRepository.numberOfBooks());
 
         //When
-        String link = service.downloadBook("The Shining");
+        String link = service.findDownloadLinkByIsbn("The Shining");
 
         //Then
         assertNull(link);

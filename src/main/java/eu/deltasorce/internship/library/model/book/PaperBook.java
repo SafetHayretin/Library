@@ -9,13 +9,14 @@ public class PaperBook extends Book {
 
     private int availableCount;
 
-    private int borrowedCount;
-
     public PaperBook(String title, Author author, String genre, String summary, String isbn, int totalCount, int availableCount) {
         super(title, author, genre, summary, isbn);
         this.setTotalCount(totalCount);
         this.setAvailableCount(availableCount);
-        borrowedCount = totalCount - availableCount;
+    }
+
+    public int borrowedCount() {
+        return  totalCount - availableCount;
     }
 
     public void setTotalCount(int totalCount) {
@@ -39,12 +40,10 @@ public class PaperBook extends Book {
     }
 
     public void updateCountAfterReturn(){
-            availableCount++;
-            borrowedCount--;
+        availableCount++;
     }
 
     public void updateCountAfterBorrow(){
         availableCount--;
-        borrowedCount++;
     }
 }

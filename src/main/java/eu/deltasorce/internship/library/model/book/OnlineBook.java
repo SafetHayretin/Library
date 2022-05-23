@@ -9,13 +9,14 @@ public class OnlineBook extends Book {
 
     private String downloadLink;
 
-    public OnlineBook(String bookTitle, Author author, String genre, String summary, String isbn, String readLink) {
-        super(bookTitle, author, genre, summary, isbn);
+    /**
+     * Creating book with parameters. Every parameter can be empty except download link.
+     * We can create books without download link. When it doesn't have download link
+     * we set it to null.
+     */
+    public OnlineBook(String title, Author author, String genre, String summary, String isbn, String readLink, String downloadLink) {
+        super(title, author, genre, summary, isbn);
         setReadLink(readLink);
-    }
-
-    public OnlineBook(String bookTitle, Author author, String genre, String summary, String isbn, String readLink, String downloadLink) {
-        this(bookTitle, author, genre, summary, isbn, readLink);
         setDownloadLink(downloadLink);
     }
 
@@ -27,9 +28,6 @@ public class OnlineBook extends Book {
     }
 
     public void setDownloadLink(String downloadLink) {
-        if (downloadLink == null || downloadLink.isBlank()) {
-            throw new IllegalArgumentException("Link to download the book can't be empty!");
-        }
         this.downloadLink = downloadLink;
     }
 }

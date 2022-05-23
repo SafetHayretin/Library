@@ -22,14 +22,14 @@ class BookRepositoryTest {
 
     private final Book theMysteriousAffair = new PaperBook("The Mysterious Affair at Styles", AuthorRepository.findByName("Agatha Christie"), "Novel", summary, "978020137962", 3, 3);
 
-    private final Book hamlet = new OnlineBook("Hamlet", AuthorRepository.findByName("William Shakespeare"), "Drama", summary, "978020131547", "www.library.com/hamlet/read");
+    private final Book hamlet = new OnlineBook("Hamlet", AuthorRepository.findByName("William Shakespeare"), "Drama", summary, "978020131547", "www.library.com/hamlet/read", null);
 
     private final Book shining = new OnlineBook("The Shining", AuthorRepository.findByName("Stephen King"), "Horror", summary, "978020134875", "www.library.com/theShining/read", "www.library.com/theShining/download");
 
     @BeforeAll
     static void fillAuthorRepository() {
         Author rowling = new Author("JK Rowling", "Britain", LocalDate.parse("1974-09-23"));
-        Author agatha = new Author("Agatha Christie", "Britain", LocalDate.parse("1890-09-15"), LocalDate.parse("1890-09-15"));
+        Author agatha = new Author("Agatha Christie", "Britain", LocalDate.parse("1890-09-15"), LocalDate.parse("1976-01-12"));
         Author william = new Author("William Shakespeare", "England", LocalDate.parse("1564-04-26"), LocalDate.parse("1616-04-24"));
         Author stephen = new Author("Stephen King", "USA", LocalDate.parse("1947-09-21"));
         AuthorRepository.add(rowling);
